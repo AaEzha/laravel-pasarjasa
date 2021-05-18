@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontController@index');
 Route::get('/kategori-jasa/{id}', 'FrontController@show_kategori')->name('kategori.nama');
+Route::get('/pesan-jasa/{jasa}', 'FrontController@isi_data')->name('pesan');
+Route::post('/pesan-jasa/{jasa}', 'FrontController@simpan_data')->name('pesan.simpan');
 
 Route::get('login', 'AuthController@showFormLogin')->name('login');
 Route::post('login', 'AuthController@login');
@@ -42,12 +44,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // CRUD PRODUK
-    Route::get('/profesi', 'profesiController@index')->name('profesi.index');
-    Route::get('/profesi/tambah', 'profesiController@create')->name('profesi.tambah');
-    Route::post('/profesi/store', 'profesiController@store')->name('profesi.store');
-    Route::get('/profesi/edit/{id}','profesiController@edit')->name('profesi.edit');
-    Route::put('/profesi/update/{id}', 'profesiController@update')->name('profesi.update');
-    Route::put('/profesi/destroy/{id}', 'profesiController@destroy')->name('profesi.destroy');
+    Route::get('/profesi', 'ProfesiController@index')->name('profesi.index');
+    Route::get('/profesi/tambah', 'ProfesiController@create')->name('profesi.tambah');
+    Route::post('/profesi/store', 'ProfesiController@store')->name('profesi.store');
+    Route::get('/profesi/edit/{id}','ProfesiController@edit')->name('profesi.edit');
+    Route::put('/profesi/update/{id}', 'ProfesiController@update')->name('profesi.update');
+    Route::put('/profesi/destroy/{id}', 'ProfesiController@destroy')->name('profesi.destroy');
 
     //CRUD PENYEDIA JASA
 
@@ -59,21 +61,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/penyediajasa/destroy/{id}', 'PenyediaJasaController@destroy')->name('penyediajasa.destroy');
 
     // CRUD JASA
-    Route::get('/jasa', 'JasaController@index')->name('jasa.index');
-    Route::get('/jasa/tambah', 'JasaController@create')->name('jasa.tambah');
-    Route::post('/jasa/store', 'JasaController@store')->name('jasa.store');
-    Route::get('/jasa/edit/{id}','JasaController@edit')->name('jasa.edit');
-    Route::put('/jasa/update/{id}', 'JasaController@update')->name('jasa.update');
-    Route::put('/jasa/destroy/{id}', 'JasaController@destroy')->name('jasa.destroy');
+    // Route::get('/jasa', 'JasaController@index')->name('jasa.index');
+    // Route::get('/jasa/tambah', 'JasaController@create')->name('jasa.tambah');
+    // Route::post('/jasa/store', 'JasaController@store')->name('jasa.store');
+    // Route::get('/jasa/edit/{id}','JasaController@edit')->name('jasa.edit');
+    // Route::put('/jasa/update/{id}', 'JasaController@update')->name('jasa.update');
+    // Route::put('/jasa/destroy/{id}', 'JasaController@destroy')->name('jasa.destroy');
 
 
      // CRUD JASA
-     Route::get('/layanan', 'layananController@index')->name('layanan.index');
-     Route::get('/layanan/tambah', 'layananController@create')->name('layanan.tambah');
-     Route::post('/layanan/store', 'layananController@store')->name('layanan.store');
-     Route::get('/layanan/edit/{id}','layananController@edit')->name('layanan.edit');
-     Route::put('/layanan/update/{id}', 'layananController@update')->name('layanan.update');
-     Route::put('/layanan/destroy/{id}', 'layananController@destroy')->name('layanan.destroy');
+     Route::get('/layanan', 'LayananController@index')->name('layanan.index');
+     Route::get('/layanan/tambah', 'LayananController@create')->name('layanan.tambah');
+     Route::post('/layanan/store', 'LayananController@store')->name('layanan.store');
+     Route::get('/layanan/edit/{id}','LayananController@edit')->name('layanan.edit');
+     Route::put('/layanan/update/{id}', 'LayananController@update')->name('layanan.update');
+     Route::put('/layanan/destroy/{id}', 'LayananController@destroy')->name('layanan.destroy');
 
+    //CRUD PELANGGAN
+
+    Route::get('/pelanggan', 'PelangganController@index')->name('pelanggan.index');
 
 });

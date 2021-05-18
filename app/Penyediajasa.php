@@ -17,10 +17,10 @@ class Penyediajasa extends Model
    public function Profesi(){
 
     // satu orang dimiliki oleh kategori
-       return $this->belongsTo(Profesi::class);    
+       return $this->belongsTo(Profesi::class);
    }
 
    public function Pelanggan(){
-       return $this->hasOne(Pelanggan::class);
+       return $this->hasMany(Pelanggan::class);
    }
 }

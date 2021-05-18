@@ -5,7 +5,7 @@ use App\Informasi;
 use App\Penyediajasa;
 use App\Profesi;
 use App\Layanan;
-use App\pelanggan;
+use App\Pelanggan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,5 +29,21 @@ class FrontController extends Controller
         $profesiAll = Profesi::findorFail($id);
      return view('front/penyediajasa', compact('profesiAll'));
 
+    }
+
+    public function isi_data(Penyediajasa $jasa)
+    {
+        return view('front.pesan', compact('jasa'));
+    }
+
+    public function simpan_data(Penyediajasa $jasa, Request $request)
+    {
+        $order = Pelanggan::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'nomor_hp' => $request->nomor_hp,
+            'penyediajasa_id' => $jasa->id
+        ]);
+        return redirect()->away("https://api.whatsapp.com/send?phone=".$jasa->nomor_telepon."&text=Konfirmasi Order PasarJasa No.".$order->id . " - Nama: " . $order->nama . " - Alamat: " . $order->alamat);
     }
 }
